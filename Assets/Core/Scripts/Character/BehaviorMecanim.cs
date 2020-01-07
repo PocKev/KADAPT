@@ -36,11 +36,27 @@ public class BehaviorMecanim : MonoBehaviour
     /// <summary>
     /// Approaches a target
     /// </summary>
-    public Node Node_GoTo(Val<Vector3> targ)
+    public Node Node_GoTo(Val<Vector3> targ, Val<float> dist)
     {
+        Func<Vector3> position =
+            delegate ()
+            {
+                Vector3 targPos = targ.Value;
+                Vector3 direction =
+                    (targPos - transform.position).normalized;
+                return targPos - (direction * dist.Value);
+            };
+
         return new LeafInvoke(
             () => this.Character.NavGoTo(targ),
             () => this.Character.NavStop());
+    }
+
+    public Node Node_GoTo(Val<Vector3> targ)
+    {
+        return new LeafInvoke(
+            () => this.Character.NavGoTo(targ), // Approach the target
+            () => this.Character.NavStop());    // Stop if we're terminated
     }
 
     public Node Node_NudgeTo(Val<Vector3> targ)

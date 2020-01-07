@@ -42,7 +42,10 @@ public class MyBehaviorTree2 : MonoBehaviour
 				this.ST_ApproachAndWait(this.wander2),
 				this.ST_ApproachAndWait(this.wander3)));
 		Node trigger = new DecoratorLoop (new LeafAssert (act));
-		Node root = new DecoratorLoop (new DecoratorForceStatus (RunStatus.Success, new SequenceParallel(trigger, roaming)));
+		Node root = new DecoratorLoop (
+			new DecoratorForceStatus (
+				RunStatus.Success, 
+				new SequenceParallel(trigger, roaming)));
 		return root;
 	}
 }
