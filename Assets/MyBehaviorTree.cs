@@ -16,7 +16,7 @@ public class MyBehaviorTree : MonoBehaviour
 	{
 		behaviorAgent = new BehaviorAgent (this.BuildTreeRoot ());
 		BehaviorManager.Instance.Register (behaviorAgent);
-		behaviorAgent.StartBehavior ();
+		behaviorAgent.StartBehavior();
 	}
 
 	protected Node ST_ApproachAndWait(Transform target)
