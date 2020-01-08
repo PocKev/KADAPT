@@ -54,9 +54,11 @@ public class InvokeConversation : MonoBehaviour
     {
         return new Sequence(
             new LeafTrace("Start conversing"),
-            playerA.GetComponent<BehaviorMecanim>().Node_HandAnimation("WAVE", true),
+            playerA.GetComponent<BehaviorMecanim>().Node_HandAnimation("WAVE", true), //start waving
             playerB.GetComponent<BehaviorMecanim>().Node_HandAnimation("WAVE", true),
-            new LeafWait(1000),
+            new LeafWait(5000),
+            playerA.GetComponent<BehaviorMecanim>().Node_HandAnimation("WAVE", false), //stop waving
+            playerB.GetComponent<BehaviorMecanim>().Node_HandAnimation("WAVE", false),
             new LeafTrace("Finished conversing"));
     }
 
